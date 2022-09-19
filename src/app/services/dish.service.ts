@@ -8,8 +8,8 @@ import { DISHES } from '../shared/dishes';
 export class DishService {
 
   constructor() { }
-  getDishes(): Dish[] {
-    return DISHES;}
+  getDishes():Promise<Dish[]> {
+    return Promise.resolve(DISHES);}
     getDish(id: string): Dish {
       return DISHES.filter((dish) => (dish.id === id))[0];
     }
