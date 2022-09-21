@@ -37,9 +37,37 @@
    <li style="list-style: none;">{{comm.rating}} Stars</li>
    
    <li style="list-style: none;">-- {{comm.author}} {{comm.date | date}} </li>
-  
-   <mat-list-item></mat-list-item>
+  <mat-list-item></mat-list-item>
 </mat-list>
+<div *ngif="!disableSubmitButton">
+  <mat-list-item>
+    <h4 matline="">{{candidateComment.comment}}</h4>
+    <p matline="">{{candidateComment.rating}} Stars</p>
+    <p matline="">
+      <span>--{{candidateComment.author}} {{candidateComment.date | date: 'longDate'}}</span>
+    </p>
+  </mat-list-item>
+</div>
+<form *ngIf="dish" novalidate="" [formGroup]="commentFeedBackForm" #cform="ngForm" (ngsubmit)="onSubmit()">
+  <mat-form-field style="width: 600px;">
+    <input matinput="" formcontrolname="author" placeholder="Name" type="text" required="">
+    <mat-error *ngif="commentFormErrors.author">{{commentFormErrors.author}}</mat-error>
+  </mat-form-field>
+  <p>
+    <mat-slider #slider="" class="mat-slide-3" thumblabel="" formcontrolname="rating" tickinterval="1" max="5" min="1" name="rating" required=""></mat-slider>
+  </p>
+  <mat-form-field style="width: 600px;">
+        <textarea matinput="" formcontrolname="comment" placeholder="Your Comment" rows="12">            </textarea>
+  </mat-form-field>
+  <p>
+    <mat-dialog-actions>
+      <span class="flex-spacer"></span>
+      <button mat-button="" type="submit" class="background-primary text-floral-white" [disabled]="disableSubmitButton" (click)="tryAddComment(candidateComment)">Submit
+      </button>
+    </mat-dialog-actions>
+  </p>
+</form>
   </div>
+
 
 </div>
